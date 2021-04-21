@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  pathLogin: 'http://localhost:3000/users',
+  pathDataByType:'http://localhost:3000/'
 };
 
 /*

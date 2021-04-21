@@ -1,0 +1,23 @@
+{
+    "users":[
+        {
+            "id":1,
+            "login":"admin",
+            "password":"12345"
+        },
+        {
+            "id":2,
+            "login":"drug admina",
+            "password":"12345"
+        }
+    ],
+
+    "contacts":[
+        {
+            "id":1,
+            "userId":1,
+            "name":"drug",
+            "phone":"7(922)0929931"
+        }
+    ]
+}

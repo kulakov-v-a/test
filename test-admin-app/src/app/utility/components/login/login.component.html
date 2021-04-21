@@ -1,0 +1,25 @@
+<mat-toolbar>
+    <span>LOGIN</span>
+</mat-toolbar>
+<mat-card class="my-card" >
+    <mat-card-content>
+        <form class="my-form" [formGroup]="loginForm" (ngSubmit) = "login($event)">
+            <mat-form-field class="full-width">
+                <mat-label>Login</mat-label>
+                <input  matInput  placeholder="login" name="login" formControlName="login">
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input  matInput type="password"  placeholder="Password" name="password" formControlName="password">
+            </mat-form-field>
+
+            <button mat-raised-button type = "submit" color="primary">LOGIN</button>
+            
+            <br>
+            <mat-label *ngIf = "!isCorrectData">Incorrect login or password</mat-label>
+        </form>
+    </mat-card-content>
+    <!-- <mat-card-actions>
+    </mat-card-actions> -->
+
+</mat-card>
