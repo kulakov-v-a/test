@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   pathLogin: 'http://localhost:3000/users',
-  pathDataByType:'http://localhost:3000/'
+  pathDataByType:'http://localhost:3000/',
+  pathInsertDataByType:'http://localhost:3000/',
+  pathUpdateDataByType:'http://localhost:3000/'
 };
 
 /*

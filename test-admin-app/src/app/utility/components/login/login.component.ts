@@ -13,13 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth:AuthService, private router:Router) { }
 
   ngOnInit(): void {
-    this.auth.login('admin','12345')
-    .then(response =>{
-      if(response)
-        this.router.navigate(['administration','contacts'])
-      else
-        this.isCorrectData = false
-    })
+
   }
 
   public isCorrectData:boolean = true
@@ -28,7 +22,13 @@ export class LoginComponent implements OnInit {
   {
     if(this.loginForm.valid)
     {
-
+      this.auth.login(this.loginForm.value.login,this.loginForm.value.password)
+      .then(response =>{
+        if(response)
+          this.router.navigate(['administration','contacts'])
+        else
+          this.isCorrectData = false
+      })
     }
   }
 

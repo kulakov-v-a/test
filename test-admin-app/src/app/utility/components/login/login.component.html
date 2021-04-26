@@ -10,11 +10,11 @@
             </mat-form-field>
             <mat-form-field class="full-width">
                 <mat-label>Password</mat-label>
-                <input  matInput type="password"  placeholder="Password" name="password" formControlName="password">
+                <input  matInput type="password"  placeholder="password" name="password" formControlName="password">
             </mat-form-field>
 
             <button mat-raised-button type = "submit" color="primary">LOGIN</button>
-            
+
             <br>
             <mat-label *ngIf = "!isCorrectData">Incorrect login or password</mat-label>
         </form>

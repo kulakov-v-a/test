@@ -1,30 +1,73 @@
-<button mat-raised-button><mat-icon>add</mat-icon></button>
-<button mat-raised-button><mat-icon>clear</mat-icon></button>
-
+<button mat-raised-button (click) = "openDialog(editTemplate)"><mat-icon>add</mat-icon></button>
+<button mat-raised-button [disabled] = '!selectionHasValue' (click) = 'onDeleteClick()'><mat-icon>clear</mat-icon></button>
+<button mat-raised-button class="logout-btn" (click) = 'logoutClick()' color="primary" >Logout</button>
+<mat-form-field class="search-input">
+  <mat-label>Search</mat-label>
+  <input matInput  placeholder="Search" name="search" (keyup)="onTypeSearch($event)">
+</mat-form-field>
 <table mat-table [dataSource]="items" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selectionHasValue && isAllSelected()"
+                            [indeterminate]="selectionHasValue && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(element) : null"
+                            [checked]="selection.isSelected(element)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
-  
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
-  
-    <!-- Weight Column -->
     <ng-container matColumnDef="phone">
       <th mat-header-cell *matHeaderCellDef> Phone </th>
-      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+      <td mat-cell *matCellDef="let element"> +7 {{element.phone | mask: '(000) 000-0000' }} </td>
     </ng-container>
-  
-  
+    <ng-container matColumnDef="buttons">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" width = '10%'>
+        <button mat-raised-button (click) = "openDialog(editTemplate,element)" ><mat-icon>edit</mat-icon></button></td>
+    </ng-container>
+
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+
+
+
+<ng-template #editTemplate>
+  <h2 matDialogTitle>{{dialogTitle}}</h2>
+  <mat-dialog-content>
+    <mat-card class = 'edit-form'>
+      <mat-card-content>
+        <form class="my-form" [formGroup]="editFormGroup">
+          <mat-form-field class="full-width">
+              <mat-label>Name</mat-label>
+              <input  matInput  placeholder="Name" name="name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+              <mat-label>Phone</mat-label>
+              <input  matInput prefix="+7" mask='(000) 000-0000'  placeholder="Phone" name="phone" formControlName="phone">
+          </mat-form-field>
+        </form>
+
+  </mat-card-content>
+  </mat-card>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button [disabled] ='!(editFormGroup.valid && !editFormGroup.pristine)' (click) = "onSubmitClick()" color="primary">Submit</button>
+    <button mat-button matDialogClose color="primary">Dismiss</button>
+  </mat-dialog-actions>
+</ng-template>

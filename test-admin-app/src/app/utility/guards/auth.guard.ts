@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
   {
     const isLoggedIn = this.auth.isAuthorized;
     const isLoginForm = route.routeConfig.path === 'login';
-
     if (isLoggedIn && isLoginForm) {
         this.router.navigate(['/']);
         return false;
@@ -27,5 +26,5 @@ export class AuthGuard implements CanActivate {
     return isLoggedIn || isLoginForm;
 
   }
-  
+
 }

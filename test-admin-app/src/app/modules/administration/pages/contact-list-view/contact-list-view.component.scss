@@ -4,3 +4,26 @@ table {
 button{
     margin:10px;
 }
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.edit-form{
+  max-width: 500px;
+  width: inherit;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.search-input
+{
+  float: right; margin-right: 50px;
+}
+
+.logout-btn
+{
+  float: right;
+}
